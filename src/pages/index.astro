@@ -1,0 +1,55 @@
+---
+import { getEmDashEntry, getSeoMeta } from "emdash";
+import Base from "../layouts/Base.astro";
+import MarketingBlocks from "../components/MarketingBlocks.astro";
+import homeFallback from "../../scripts/content/home.json";
+import type { PageContentBlock } from "../../emdash-env";
+import { homeSeo } from "../lib/seo";
+
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "home");
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+// Keep the local preview useful before its EmDash database has a published
+// home entry. Once CMS content exists, the live entry remains authoritative.
+const fallbackContent = homeFallback.content.map((block) =>
+	block._type === "marketing_hero"
+		? {
+				...block,
+				image: {
+					...block.image,
+					src: "/images/people/friends-on-phone.jpg",
+				},
+			}
+		: block,
+) as PageContentBlock[];
+const pageContent = (page?.data.content ?? fallbackContent) as PageContentBlock[];
+const seo = page
+	? getSeoMeta(page, {
+			siteUrl: Astro.url.origin,
+			path: "/",
+			defaultTitle: homeSeo.title,
+			defaultDescription: homeSeo.description,
+		})
+	: null;
+---
+
+<Base
+	title={seo?.title || homeSeo.title}
+	pageTitle={seo?.ogTitle || homeSeo.title}
+	description={seo?.description || homeSeo.description}
+	image={seo?.ogImage}
+	canonical={seo?.canonical}
+	robots={seo?.robots}
+	content={page ? { collection: "pages", id: page.data.id, slug: page.id } : undefined}
+>
+	{
+		page && pageContent ? (
+			<div {...page.edit.content}>
+				<MarketingBlocks value={pageContent} />
+			</div>
+		) : (
+			<MarketingBlocks value={pageContent} />
+		)
+	}
+</Base>

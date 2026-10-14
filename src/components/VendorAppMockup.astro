@@ -1,0 +1,245 @@
+---
+import {
+	CaretRightIcon,
+	ChatCircleIcon,
+	ChartLineUpIcon,
+	HouseIcon,
+	PackageIcon,
+	PlusIcon,
+	ReceiptIcon,
+} from "@phosphor-icons/react/ssr";
+import type { PageContentBlock } from "../../emdash-env";
+
+type VendorAppBlock = Extract<PageContentBlock, { _type: "marketing_vendor_app" }>;
+interface Props { value: VendorAppBlock }
+
+const { value } = Astro.props;
+const actions = [
+	{ label: value.orders_action_label, icon: ReceiptIcon },
+	{ label: value.products_action_label, icon: PackageIcon },
+	{ label: value.inbox_action_label, icon: ChatCircleIcon },
+];
+
+const tabs = [
+	{ label: value.home_tab_label, icon: HouseIcon },
+	{ label: value.orders_tab_label, icon: ReceiptIcon },
+	{ label: value.products_tab_label, icon: PackageIcon },
+	{ label: value.inbox_tab_label, icon: ChatCircleIcon },
+];
+---
+
+<div
+	class="demo-phone vendor-demo"
+	role="img"
+	aria-label="Illustrative WarpCart vendor app with store sales, recent orders and quick actions. Sample data only; this is a design mockup, not the current app interface."
+>
+	<div class="phone-screen vendor-screen" aria-hidden="true">
+		<div class="ios-status">
+			<span class="ios-time">9:41</span>
+			<span class="ios-indicators">
+				<svg class="ios-cellular" viewBox="0 0 20 14" fill="currentColor" aria-hidden="true"><rect x="0" y="9" width="3" height="5" rx=".6"/><rect x="5" y="6" width="3" height="8" rx=".6"/><rect x="10" y="3" width="3" height="11" rx=".6"/><rect x="15" width="3" height="14" rx=".6"/></svg>
+				<svg class="ios-wifi" viewBox="0 0 20 15" fill="currentColor" aria-hidden="true"><path d="M0 4a16 16 0 0 1 20 0l-2.4 2.5a12.5 12.5 0 0 0-15.2 0Zm4.1 4.2a9 9 0 0 1 11.8 0l-2.4 2.5a5.5 5.5 0 0 0-7 0Zm3.5 3.6a3.5 3.5 0 0 1 4.8 0L10 15Z"/></svg>
+				<svg class="ios-battery" viewBox="0 0 30 14" aria-hidden="true"><rect x=".5" y="1" width="25" height="12" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2.5" y="3" width="21" height="8" rx="1.5" fill="currentColor"/><path d="M27 4v6c2 0 2-6 0-6" fill="currentColor" opacity=".4"/></svg>
+			</span>
+		</div>
+
+		<main class="vendor-content">
+			<header class="vendor-header">
+				<div class="vendor-avatar">{value.store_name.slice(0, 1).toUpperCase()}</div>
+				<span class="vendor-open-status"><span></span>{value.orders_today_count} {value.orders_today_label}</span>
+				<span class="vendor-header-trend"><ChartLineUpIcon size={17} weight="regular" /></span>
+			</header>
+
+			<div class="vendor-welcome">
+				<h3>{value.greeting_prefix} {value.store_name}</h3>
+				<p>{value.greeting_note}</p>
+			</div>
+
+			<div class="vendor-actions">
+				<div class="vendor-action-primary"><PlusIcon size={16} weight="bold" /><span>{value.add_product_label}</span></div>
+				{actions.map(({ label, icon: Icon }) => (
+					<div class="vendor-action"><Icon size={15} weight="regular" /><span>{label}</span></div>
+				))}
+			</div>
+
+			<section class="vendor-balance-section" aria-label="Store overview">
+				<div class="vendor-section-heading"><h4>{value.overview_heading}</h4><span>{value.overview_period} <CaretRightIcon size={12} /></span></div>
+				<div class="vendor-balance-row">
+					<div class="vendor-balance-card">
+						<div class="vendor-currency-mark">{value.currency_code}</div>
+						<p>{value.sales_label}</p>
+						<strong><small>{value.currency_code}</small> {value.sales_amount}</strong>
+						<div class="vendor-card-foot"><span>{value.sales_orders_summary}</span><span class="vendor-growth">{value.growth_label}</span></div>
+					</div>
+					<div class="vendor-pending-card">
+						<div class="vendor-pending-mark"><ReceiptIcon size={19} weight="regular" /></div>
+						<p>{value.pending_heading}</p>
+						<strong>{value.pending_count}</strong>
+						<span>{value.pending_note}</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="vendor-orders-section" aria-label="Recent orders">
+				<div class="vendor-section-heading"><h4>{value.recent_orders_heading}</h4><span>{value.recent_orders_link_label} <CaretRightIcon size={12} /></span></div>
+				<div class="vendor-order-list">
+					{value.recent_orders.map((order) => (
+						<div class="vendor-order-row">
+							<span class="vendor-order-avatar">{order.initials}</span>
+							<span class="vendor-order-copy"><strong>{order.customer}</strong><small>{order.detail}</small></span>
+							<span class="vendor-order-total"><strong>{order.amount}</strong><small>{order.status}</small></span>
+						</div>
+					))}
+				</div>
+			</section>
+		</main>
+
+		<nav class="vendor-toolbar" aria-label="App navigation">
+			{tabs.map(({ label, icon: Icon }, index) => (
+				<div class:list={{ "vendor-tab-active": index === 0 }}>
+					<Icon size={20} weight={index === 0 ? "fill" : "regular"} />
+					<span>{label}</span>
+				</div>
+			))}
+		</nav>
+		<div class="vendor-safe-area"><span></span></div>
+	</div>
+</div>
+
+<style>
+	:global(:root body) .vendor-demo {
+		border-color: #d7d8d1;
+		border-radius: 46px;
+		background: #fafaf7;
+		box-shadow: 0 28px 60px rgb(0 0 0 / .2), inset 0 0 0 1px #fff;
+		color: #171914;
+		font-family: var(--font-body), Arial, sans-serif;
+	}
+	:global(:root body) .vendor-demo::before,
+	:global(:root body) .vendor-demo::after { content: none; }
+	:global(:root body) .vendor-screen {
+		background: #fffdfb;
+		color: #171914;
+		font-family: var(--font-body), Arial, sans-serif;
+		font-optical-sizing: auto;
+	}
+	:global(:root body) .vendor-screen .ios-status { background: #fffdfb; }
+	.vendor-content {
+		position: absolute;
+		inset: calc(var(--u) * 59) 0 calc(var(--u) * 78);
+		overflow-y: auto;
+		scrollbar-width: none;
+		padding: calc(var(--u) * 8) calc(var(--u) * 20) calc(var(--u) * 24);
+	}
+	.vendor-content::-webkit-scrollbar { display: none; }
+	.vendor-header { display: flex; align-items: center; gap: calc(var(--u) * 9); }
+	.vendor-avatar {
+		display: grid;
+		place-items: center;
+		width: calc(var(--u) * 36);
+		height: calc(var(--u) * 36);
+		border: 1px solid #dfe0da;
+		border-radius: 50%;
+		color: #25281f;
+		font-size: calc(var(--u) * 15);
+		font-weight: 600;
+	}
+	.vendor-open-status {
+		display: inline-flex;
+		align-items: center;
+		gap: calc(var(--u) * 6);
+		padding: calc(var(--u) * 7) calc(var(--u) * 10);
+		border-radius: 999px;
+		background: var(--color-brand-soft);
+		color: var(--color-brand-strong);
+		font-size: calc(var(--u) * 11);
+		font-weight: 600;
+	}
+	.vendor-open-status span { width: calc(var(--u) * 6); height: calc(var(--u) * 6); border-radius: 50%; background: var(--color-brand); }
+	.vendor-header-trend {
+		display: grid;
+		place-items: center;
+		width: calc(var(--u) * 36);
+		height: calc(var(--u) * 36);
+		margin-inline-start: auto;
+		border: 1px solid #e3e3de;
+		border-radius: 50%;
+		color: var(--color-brand-strong);
+	}
+	.vendor-welcome { margin-top: calc(var(--u) * 22); }
+	.vendor-welcome h3 { margin: 0; color: inherit; font-family: inherit; font-size: calc(var(--u) * 27); font-weight: 600; line-height: 1.12; letter-spacing: -.045em; }
+	.vendor-welcome p { margin-top: calc(var(--u) * 6); color: #74766f; font-size: calc(var(--u) * 13); line-height: 1.4; }
+	.vendor-actions { display: flex; gap: calc(var(--u) * 7); margin-top: calc(var(--u) * 18); white-space: nowrap; }
+	.vendor-action-primary,
+	.vendor-action {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: calc(var(--u) * 5);
+		min-height: calc(var(--u) * 34);
+		padding-inline: calc(var(--u) * 11);
+		border-radius: 999px;
+		font-size: calc(var(--u) * 10.5);
+		font-weight: 600;
+	}
+	.vendor-action-primary { background: var(--color-brand-soft); color: var(--color-brand-strong); }
+	.vendor-action { background: #f0f1ec; color: #30332b; }
+	.vendor-balance-section { margin-top: calc(var(--u) * 24); }
+	.vendor-section-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: calc(var(--u) * 11); }
+	.vendor-section-heading h4 { margin: 0; color: inherit; font-family: inherit; font-size: calc(var(--u) * 18); font-weight: 600; letter-spacing: -.035em; }
+	.vendor-section-heading > span { display: inline-flex; align-items: center; gap: calc(var(--u) * 2); color: #63665d; font-size: calc(var(--u) * 11); font-weight: 500; }
+	.vendor-section-heading svg { width: calc(var(--u) * 12); height: calc(var(--u) * 12); }
+	.vendor-balance-row { display: flex; gap: calc(var(--u) * 10); overflow-x: auto; margin-inline: calc(var(--u) * -20); padding-inline: calc(var(--u) * 20); scrollbar-width: none; }
+	.vendor-balance-row::-webkit-scrollbar { display: none; }
+	.vendor-balance-card,
+	.vendor-pending-card { box-sizing: border-box; flex: 0 0 calc(var(--u) * 272); min-height: calc(var(--u) * 178); padding: calc(var(--u) * 15); border-radius: calc(var(--u) * 18); background: #f0f1ec; }
+	.vendor-currency-mark,
+	.vendor-pending-mark {
+		display: grid;
+		place-items: center;
+		width: calc(var(--u) * 35);
+		height: calc(var(--u) * 35);
+		border-radius: 50%;
+		background: #fffdfb;
+		color: #34372e;
+		font-size: calc(var(--u) * 9);
+		font-weight: 600;
+	}
+	.vendor-balance-card > p,
+	.vendor-pending-card > p { margin-top: calc(var(--u) * 12); color: #63665d; font-size: calc(var(--u) * 11); }
+	.vendor-balance-card > strong,
+	.vendor-pending-card > strong { display: block; margin-top: calc(var(--u) * 3); font-size: calc(var(--u) * 27); font-weight: 600; line-height: 1.15; letter-spacing: -.045em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+	.vendor-balance-card > strong small { color: #696b63; font-size: calc(var(--u) * 13); font-weight: 500; letter-spacing: 0; }
+	.vendor-card-foot { display: flex; gap: calc(var(--u) * 10); margin-top: calc(var(--u) * 10); color: #72746d; font-size: calc(var(--u) * 10); }
+	.vendor-growth { color: var(--color-brand-strong); font-weight: 600; }
+	.vendor-pending-card { flex-basis: calc(var(--u) * 140); background: transparent; border: 1px dashed #d8d9d2; }
+	.vendor-pending-mark { border: 1px solid #dedfd9; background: transparent; color: #4f5348; }
+	.vendor-pending-card > strong { font-size: calc(var(--u) * 32); }
+	.vendor-pending-card > span { display: block; margin-top: calc(var(--u) * 5); color: #72746d; font-size: calc(var(--u) * 10); white-space: nowrap; }
+	.vendor-orders-section { margin-top: calc(var(--u) * 25); }
+	.vendor-order-list { background: #fffdfb; }
+	.vendor-order-row { position: relative; display: flex; align-items: center; gap: calc(var(--u) * 10); min-height: calc(var(--u) * 64); }
+	.vendor-order-row + .vendor-order-row::before { position: absolute; inset: 0 0 auto calc(var(--u) * 46); height: 1px; background: #ecece7; content: ''; }
+	.vendor-order-avatar { display: grid; place-items: center; flex: none; width: calc(var(--u) * 34); height: calc(var(--u) * 34); border-radius: 50%; background: #f0f1ec; color: #45483e; font-size: calc(var(--u) * 10); font-weight: 600; }
+	.vendor-order-copy { display: flex; flex: 1; flex-direction: column; gap: calc(var(--u) * 3); min-width: 0; }
+	.vendor-order-copy strong { font-size: calc(var(--u) * 11.5); font-weight: 600; }
+	.vendor-order-copy small { overflow: hidden; color: #777970; font-size: calc(var(--u) * 9.5); text-overflow: ellipsis; white-space: nowrap; }
+	.vendor-order-total { display: flex; flex: none; flex-direction: column; align-items: flex-end; gap: calc(var(--u) * 4); }
+	.vendor-order-total strong { font-size: calc(var(--u) * 10); font-weight: 600; }
+	.vendor-order-total small { color: #72746d; font-size: calc(var(--u) * 9); }
+	.vendor-toolbar {
+		position: absolute;
+		inset: auto 0 calc(var(--u) * 20);
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		padding: calc(var(--u) * 8) calc(var(--u) * 8) calc(var(--u) * 4);
+		border-top: 1px solid #ecece7;
+		background: #fffdfb;
+	}
+	.vendor-toolbar > div { display: flex; align-items: center; flex-direction: column; justify-content: center; gap: calc(var(--u) * 3); padding-block: calc(var(--u) * 3); color: #85877f; }
+	.vendor-toolbar :global(svg) { width: calc(var(--u) * 20); height: calc(var(--u) * 20); }
+	.vendor-toolbar span { font-size: calc(var(--u) * 9); font-weight: 500; }
+	.vendor-toolbar .vendor-tab-active { color: var(--color-brand-strong); }
+	.vendor-safe-area { position: absolute; inset: auto 0 0; display: grid; place-items: center; height: calc(var(--u) * 20); background: #fffdfb; }
+	.vendor-safe-area span { width: calc(var(--u) * 108); height: calc(var(--u) * 4); border-radius: 4px; background: #191a16; }
+</style>

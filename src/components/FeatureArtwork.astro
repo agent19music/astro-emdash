@@ -1,0 +1,37 @@
+---
+import { artworkKey, artworkAlt, artworkLayouts, artworkPath } from './artwork/feature-artwork';
+interface Props { icon: string; index: number }
+const { icon, index } = Astro.props;
+const key = artworkKey(icon, index);
+const compact = index === 1 || index === 2;
+const mobileLayout = compact ? 'compact' : 'mobile';
+// Art direction follows CSS width, independently of device pixel ratio.
+// A normal width-descriptor srcset could select a differently framed canvas
+// on a 1x screen, magnifying the phone when stretched into a wider card.
+const variants = [mobileLayout, 'tablet', 'desktop'].flatMap(layout => {
+	const widths = artworkLayouts[layout as keyof typeof artworkLayouts].widths;
+	return widths.map((width, i) => {
+		const upper = widths[i + 1] ? (width + widths[i + 1]) / 2 : undefined;
+		const desktop = layout === 'desktop' || layout === 'tablet';
+		const viewportUpper = upper === undefined ? undefined : desktop ? upper * 2 + 72 : compact ? upper * 2 + 40 : upper + 32;
+		const media = desktop
+			? `(min-width: ${layout === 'tablet' ? 681 : 901}px)${layout === 'tablet' ? ` and (max-width: ${Math.min(viewportUpper ?? 900, 900)}px)` : viewportUpper ? ` and (max-width: ${viewportUpper}px)` : ''}`
+			: `(max-width: ${Math.min(viewportUpper ?? 680, 680)}px)`;
+		return { layout, media, width };
+	});
+});
+---
+<picture class="feature-artwork">
+	{[true, false].flatMap(reduced => variants.map(({ layout, media, width }) => (
+		<source
+			media={reduced ? `${media} and (prefers-reduced-transparency: reduce)` : media}
+			srcset={`${artworkPath(key, layout, width, reduced)} 2x`}
+			type="image/webp"
+		/>
+	)))}
+	<img src={artworkPath(key, 'desktop', 564)} alt={artworkAlt(icon)} width="1128" height="960" loading="lazy" decoding="async" />
+</picture>
+<style>
+	.feature-artwork { position: absolute; inset: 0; display: block; }
+	.feature-artwork img { display: block; width: 100%; height: 100%; object-fit: fill; }
+</style>

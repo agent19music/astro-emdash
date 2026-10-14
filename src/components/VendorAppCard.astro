@@ -1,0 +1,67 @@
+---
+import { sanitizeHref } from "emdash";
+import type { PageContentBlock } from "../../emdash-env";
+import VendorAppMockup from "./VendorAppMockup.astro";
+
+type VendorAppBlock = Extract<PageContentBlock, { _type: "marketing_vendor_app" }>;
+interface Props { value: VendorAppBlock }
+
+const { value } = Astro.props;
+const googlePlayUrl = sanitizeHref(value.google_play_url);
+const appStoreUrl = sanitizeHref(value.app_store_url);
+---
+
+<section
+	class="vendor-app-section"
+	id={value.anchor_id || undefined}
+	aria-labelledby={`vendor-app-heading-${value._key}`}
+>
+	<div class="vendor-app-card">
+		<div class="vendor-app-copy">
+			<p class="vendor-app-eyebrow">{value.eyebrow}</p>
+			<h2 id={`vendor-app-heading-${value._key}`}>{value.headline}</h2>
+			<p class="vendor-app-description">{value.description}</p>
+			<div class="vendor-app-downloads">
+				<a class="vendor-app-download" href={googlePlayUrl} aria-label="Get WarpCart Vendor on Google Play">
+					<img src="/images/google-play-badge.png" alt="Get it on Google Play" width="478" height="142" loading="lazy" />
+				</a>
+				<a class="vendor-app-download" href={appStoreUrl} aria-label="Contact WarpCart about the iOS app">
+					<img src="/images/app-store-badge.svg" alt="Contact us about the iOS app" width="120" height="40" loading="lazy" />
+				</a>
+			</div>
+		</div>
+		<div class="vendor-app-visual">
+			<VendorAppMockup value={value} />
+		</div>
+	</div>
+</section>
+
+<style>
+	.vendor-app-section { max-width: var(--wide-width); margin: 0 auto; padding: 0 var(--spacing-lg) var(--spacing-4xl); }
+	.vendor-app-card { display: grid; grid-template-columns: 1.15fr 1fr; overflow: hidden; border-radius: 24px; background: var(--color-surface); color: var(--color-text); }
+	.vendor-app-copy { padding: clamp(32px, 5vw, 64px); align-self: center; }
+	.vendor-app-eyebrow { margin-bottom: 16px; color: var(--color-brand); font-size: var(--font-size-sm); font-weight: 500; }
+	h2 { color: inherit; font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.035em; font-weight: var(--font-weight-display); max-width: 13ch; text-wrap: balance; }
+	.vendor-app-description { margin-top: 20px; color: var(--color-muted); font-size: var(--font-size-lg); line-height: var(--leading-normal); max-width: 35ch; text-wrap: pretty; }
+	.vendor-app-downloads { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+	.vendor-app-download { display: inline-flex; border-radius: var(--radius-sm); }
+	.vendor-app-downloads img { display: block; width: auto; height: 48px; }
+	.vendor-app-download:focus-visible { outline: 2px solid var(--color-brand-ring); outline-offset: 6px; }
+	.vendor-app-download:active { opacity: .8; }
+	.vendor-app-visual { min-height: 520px; position: relative; isolation: isolate; background: var(--color-product-frame) url('/images/app-bg.webp') center / cover; }
+	.vendor-app-visual :global(.vendor-demo) { position: absolute; top: 40px; left: 50%; width: 320px; transform: translateX(-50%); }
+	@media (prefers-reduced-motion: no-preference) {
+		.vendor-app-download { transition: transform 150ms ease-out, opacity 150ms ease-out; }
+		.vendor-app-download:active { transform: scale(.96); }
+	}
+	@media (max-width: 900px) {
+		.vendor-app-section { padding-inline: 16px; padding-bottom: var(--spacing-2xl); }
+		.vendor-app-card { grid-template-columns: 1fr; }
+		.vendor-app-copy { padding: 32px 24px; }
+		h2 { font-size: 2.25rem; max-width: 14ch; }
+		.vendor-app-description { font-size: var(--font-size-base); margin-top: 16px; }
+		.vendor-app-downloads { margin-top: 24px; }
+		.vendor-app-visual { min-height: 440px; }
+		.vendor-app-visual :global(.vendor-demo) { top: 32px; width: min(300px, 85%); }
+	}
+</style>

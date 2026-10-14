@@ -1,0 +1,25 @@
+---
+// Source-only export canvas. Never expose the renderer on the deployed site.
+import FeatureArtworkSource from '../../components/artwork/FeatureArtworkSource.astro';
+import { artworkKeys } from '../../components/artwork/feature-artwork';
+import '../../styles/tokens.css';
+import '../../styles/theme.css';
+import '../../styles/feature-artwork-source.css';
+if (!import.meta.env.DEV) return new Response(null, { status: 404 });
+---
+<!doctype html>
+<html lang="en">
+	<head><meta charset="utf-8" /><meta name="robots" content="noindex" /><title>Feature artwork export canvas</title></head>
+	<body>
+		{artworkKeys.map(artwork => <div class="feature-card" data-artwork={artwork}><FeatureArtworkSource artwork={artwork} /></div>)}
+	</body>
+</html>
+<style is:global>
+	* { box-sizing: border-box; margin: 0; padding: 0; }
+	:root { color-scheme: only light; }
+	body { font-family: sans-serif; }
+	img { max-width: 100%; display: block; }
+	:root body .feature-card { width: var(--export-width, 564px); height: var(--export-height, 480px); border-radius: 0; margin-bottom: 8px; }
+	:root body .feature-card .demo-phone { width: var(--export-phone-width, 340px); top: var(--export-phone-top, -62px); transform: translateX(-50%) scale(var(--export-phone-scale, 1.22)); }
+	:root body .feature-card .feature-blur { height: var(--export-blur-height, 60%); }
+</style>

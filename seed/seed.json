@@ -1,0 +1,1051 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "WarpCart pitch",
+		"description": "Independent design pitch using WarpCart public product information",
+		"author": "EmDash"
+	},
+	"settings": {
+		"title": "WarpCart",
+		"tagline": "Sell on WhatsApp. Manage your store in one workspace."
+	},
+	"blockTypes": [
+		{
+			"slug": "marketing_hero",
+			"label": "Hero",
+			"description": "A prominent page introduction with optional calls to action and media",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "subheadline",
+							"label": "Subheadline",
+							"type": "text"
+						},
+						{
+							"slug": "primary_cta_label",
+							"label": "Primary CTA label",
+							"type": "string"
+						},
+						{
+							"slug": "primary_cta_url",
+							"label": "Primary CTA URL",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$"
+							}
+						},
+						{
+							"slug": "secondary_cta_label",
+							"label": "Secondary CTA label",
+							"type": "string"
+						},
+						{
+							"slug": "secondary_cta_url",
+							"label": "Secondary CTA URL",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$"
+							}
+						},
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
+						},
+						{
+							"slug": "centered",
+							"label": "Center the layout",
+							"type": "boolean",
+							"defaultValue": false
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "marketing_features",
+			"label": "Features",
+			"description": "A grid of product or service features",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "subheadline",
+							"label": "Subheadline",
+							"type": "text"
+						},
+						{
+							"slug": "features",
+							"label": "Features",
+							"type": "repeater",
+							"required": true,
+							"validation": {
+								"minItems": 1,
+								"maxItems": 12,
+								"subFields": [
+									{
+										"slug": "icon",
+										"label": "Icon",
+										"type": "select",
+										"required": true,
+										"options": [
+											"zap",
+											"shield",
+											"users",
+											"chart",
+											"code",
+											"globe",
+											"heart",
+											"star",
+											"check",
+											"lock",
+											"clock",
+											"cloud"
+										]
+									},
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "description",
+										"label": "Description",
+										"type": "text",
+										"required": true
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "marketing_testimonials",
+			"label": "Testimonials",
+			"description": "Customer quotes and attribution",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
+						{
+							"slug": "testimonials",
+							"label": "Testimonials",
+							"type": "repeater",
+							"required": true,
+							"validation": {
+								"minItems": 1,
+								"maxItems": 12,
+								"subFields": [
+									{
+										"slug": "quote",
+										"label": "Quote",
+										"type": "text",
+										"required": true
+									},
+									{
+										"slug": "author",
+										"label": "Author name",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "role",
+										"label": "Role or title",
+										"type": "string"
+									},
+									{
+										"slug": "company",
+										"label": "Company",
+										"type": "string"
+									},
+									{
+										"slug": "avatar",
+										"label": "Avatar",
+										"type": "image"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "marketing_pricing",
+			"label": "Pricing",
+			"description": "A comparison of up to three pricing plans",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
+						{
+							"slug": "plans",
+							"label": "Plans",
+							"type": "repeater",
+							"required": true,
+							"validation": {
+								"minItems": 1,
+								"maxItems": 3,
+								"subFields": [
+									{
+										"slug": "name",
+										"label": "Plan name",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "price",
+										"label": "Price",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "period",
+										"label": "Period",
+										"type": "string"
+									},
+									{
+										"slug": "description",
+										"label": "Description",
+										"type": "text"
+									},
+									{
+										"slug": "features",
+										"label": "Features, one per line",
+										"type": "text"
+									},
+									{
+										"slug": "cta_label",
+										"label": "CTA label",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "cta_url",
+										"label": "CTA URL",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "highlighted",
+										"label": "Highlight this plan",
+										"type": "boolean"
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "marketing_faq",
+			"label": "FAQ",
+			"description": "A list of frequently asked questions",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
+						{
+							"slug": "items",
+							"label": "Questions",
+							"type": "repeater",
+							"required": true,
+							"validation": {
+								"minItems": 1,
+								"maxItems": 12,
+								"subFields": [
+									{
+										"slug": "question",
+										"label": "Question",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "answer",
+										"label": "Answer",
+										"type": "text",
+										"required": true
+									}
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "marketing_vendor_app",
+			"label": "Vendor app",
+			"description": "A promotional section with an editable WarpCart Vendor App mockup.",
+			"category": "Marketing",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "anchor_id",
+							"label": "Anchor ID",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						},
+						{
+							"slug": "eyebrow",
+							"label": "Section label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "WarpCart Vendor App"
+						},
+						{
+							"slug": "headline",
+							"label": "Section headline",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Manage your store on the go."
+						},
+						{
+							"slug": "description",
+							"label": "Section description",
+							"type": "text",
+							"required": true,
+							"defaultValue": "Manage products, orders, customers and WhatsApp sales from the WarpCart Vendor App for Android."
+						},
+						{
+							"slug": "google_play_url",
+							"label": "Google Play destination",
+							"type": "url",
+							"required": true,
+							"defaultValue": "https://wc.uzskicorp.agency/contact"
+						},
+						{
+							"slug": "app_store_url",
+							"label": "App Store destination",
+							"type": "url",
+							"required": true,
+							"defaultValue": "/contact"
+						},
+						{
+							"slug": "store_name",
+							"label": "Mockup store name",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Acme"
+						},
+						{
+							"slug": "orders_today_count",
+							"label": "Orders today count",
+							"type": "string",
+							"required": true,
+							"defaultValue": "18"
+						},
+						{
+							"slug": "orders_today_label",
+							"label": "Orders today label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "orders today"
+						},
+						{
+							"slug": "greeting_prefix",
+							"label": "Mockup greeting",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Welcome to"
+						},
+						{
+							"slug": "greeting_note",
+							"label": "Mockup greeting note",
+							"type": "text",
+							"required": true,
+							"defaultValue": "Here’s how your store is doing today."
+						},
+						{
+							"slug": "add_product_label",
+							"label": "Add product action",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Add product"
+						},
+						{
+							"slug": "orders_action_label",
+							"label": "Orders action",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Orders"
+						},
+						{
+							"slug": "products_action_label",
+							"label": "Products action",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Products"
+						},
+						{
+							"slug": "inbox_action_label",
+							"label": "Inbox action",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Inbox"
+						},
+						{
+							"slug": "overview_heading",
+							"label": "Overview heading",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Store overview"
+						},
+						{
+							"slug": "overview_period",
+							"label": "Overview period",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Today"
+						},
+						{
+							"slug": "sales_label",
+							"label": "Sales label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Sales today"
+						},
+						{
+							"slug": "currency_code",
+							"label": "Currency code",
+							"type": "string",
+							"required": true,
+							"defaultValue": "KES"
+						},
+						{
+							"slug": "sales_amount",
+							"label": "Sales amount",
+							"type": "string",
+							"required": true,
+							"defaultValue": "11,674"
+						},
+						{
+							"slug": "sales_orders_summary",
+							"label": "Sales card order summary",
+							"type": "string",
+							"required": true,
+							"defaultValue": "18 orders"
+						},
+						{
+							"slug": "growth_label",
+							"label": "Sales growth label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "↗ 9.3%"
+						},
+						{
+							"slug": "pending_heading",
+							"label": "Pending orders heading",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Pending orders"
+						},
+						{
+							"slug": "pending_count",
+							"label": "Pending orders count",
+							"type": "string",
+							"required": true,
+							"defaultValue": "10"
+						},
+						{
+							"slug": "pending_note",
+							"label": "Pending orders note",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Need attention"
+						},
+						{
+							"slug": "recent_orders_heading",
+							"label": "Recent orders heading",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Recent orders"
+						},
+						{
+							"slug": "recent_orders_link_label",
+							"label": "Recent orders link label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "See all"
+						},
+						{
+							"slug": "recent_orders",
+							"label": "Sample recent orders",
+							"type": "repeater",
+							"required": true,
+							"validation": {
+								"minItems": 1,
+								"maxItems": 4,
+								"subFields": [
+									{
+										"slug": "initials",
+										"label": "Customer initials",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "customer",
+										"label": "Customer name",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "detail",
+										"label": "Order detail",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "amount",
+										"label": "Order amount",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "status",
+										"label": "Order status",
+										"type": "string",
+										"required": true
+									}
+								]
+							}
+						},
+						{
+							"slug": "home_tab_label",
+							"label": "Home tab label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Home"
+						},
+						{
+							"slug": "orders_tab_label",
+							"label": "Orders tab label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Orders"
+						},
+						{
+							"slug": "products_tab_label",
+							"label": "Products tab label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Products"
+						},
+						{
+							"slug": "inbox_tab_label",
+							"label": "Inbox tab label",
+							"type": "string",
+							"required": true,
+							"defaultValue": "Inbox"
+						}
+					]
+				}
+			]
+		}
+	],
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": [
+				"drafts",
+				"revisions",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "blocks",
+					"validation": {
+						"allowedTypes": [
+							"marketing_hero",
+							"marketing_features",
+							"marketing_testimonials",
+							"marketing_pricing",
+							"marketing_faq",
+							"marketing_vendor_app"
+						],
+						"maxItems": 20
+					}
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Features",
+					"url": "/#features"
+				},
+				{
+					"type": "custom",
+					"label": "Pricing",
+					"url": "/pricing"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				}
+			]
+		},
+		{
+			"name": "footer_product",
+			"label": "Footer: Product",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Features",
+					"url": "/#features"
+				},
+				{
+					"type": "custom",
+					"label": "Pricing",
+					"url": "/pricing"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				}
+			]
+		},
+		{
+			"name": "footer_company",
+			"label": "Footer: Company",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Home",
+					"url": "/"
+				},
+				{
+					"type": "custom",
+					"label": "Features",
+					"url": "/#features"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				}
+			]
+		},
+		{
+			"name": "footer_support",
+			"label": "Footer: Support",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Pricing",
+					"url": "/pricing"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				},
+				{
+					"type": "custom",
+					"label": "WhatsApp",
+					"url": "https://wa.me/254119413044"
+				}
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"content": [
+						{
+							"_type": "marketing_hero",
+							"_version": 1,
+							"_key": "hero",
+							"headline": "Sell on WhatsApp. Keep everything in one place.",
+							"subheadline": "Let customers browse products, ask questions and pay with M-Pesa in WhatsApp. Manage your catalog, orders and customer conversations from the WarpCart vendor workspace.",
+							"centered": false,
+							"primary_cta_label": "Start free",
+							"primary_cta_url": "https://wc.uzskicorp.agency/contact",
+							"secondary_cta_label": "See how it works",
+							"secondary_cta_url": "https://wc.uzskicorp.agency/contact"
+						},
+						{
+							"_type": "marketing_features",
+							"_version": 1,
+							"_key": "features",
+							"anchor_id": "features",
+							"headline": "From the first message to a paid order",
+							"subheadline": "Tools for the conversations, products and orders behind your store.",
+							"features": [
+								{
+									"icon": "globe",
+									"title": "A storefront in WhatsApp",
+									"description": "Customers browse your catalog and place orders in the chat."
+								},
+								{
+									"icon": "cloud",
+									"title": "Keep your catalog current",
+									"description": "Manage products, prices and stock from your vendor workspace."
+								},
+								{
+									"icon": "users",
+									"title": "Reach customers again",
+									"description": "Send targeted campaigns and broadcasts with message templates."
+								},
+								{
+									"icon": "clock",
+									"title": "Recover abandoned carts",
+									"description": "Follow up automatically when shoppers leave a cart behind."
+								},
+								{
+									"icon": "star",
+									"title": "Answer product questions",
+									"description": "Use AI replies and relevant product recommendations in WhatsApp conversations."
+								},
+								{
+									"icon": "chart",
+									"title": "Track the sale through fulfillment",
+									"description": "Manage orders, payments and store performance from one dashboard."
+								}
+							]
+						},
+						{
+							"_type": "marketing_vendor_app",
+							"_version": 1,
+							"_key": "vendor-app",
+							"eyebrow": "WarpCart Vendor App",
+							"headline": "Manage your store on the go.",
+							"description": "Manage products, orders, customers and WhatsApp sales from the WarpCart Vendor App for Android.",
+							"google_play_url": "https://wc.uzskicorp.agency/contact",
+							"app_store_url": "/contact",
+							"store_name": "Acme",
+							"orders_today_count": "18",
+							"orders_today_label": "orders today",
+							"greeting_prefix": "Welcome to",
+							"greeting_note": "Here’s how your store is doing today.",
+							"add_product_label": "Add product",
+							"orders_action_label": "Orders",
+							"products_action_label": "Products",
+							"inbox_action_label": "Inbox",
+							"overview_heading": "Store overview",
+							"overview_period": "Today",
+							"sales_label": "Sales today",
+							"currency_code": "KES",
+							"sales_amount": "11,674",
+							"sales_orders_summary": "18 orders",
+							"growth_label": "↗ 9.3%",
+							"pending_heading": "Pending orders",
+							"pending_count": "10",
+							"pending_note": "Need attention",
+							"recent_orders_heading": "Recent orders",
+							"recent_orders_link_label": "See all",
+							"recent_orders": [
+								{
+									"initials": "MW",
+									"customer": "Mercy W.",
+									"detail": "Red Spezial · Size 42",
+									"amount": "+ KES 9,500",
+									"status": "Paid"
+								},
+								{
+									"initials": "DK",
+									"customer": "David K.",
+									"detail": "Olive tote · Order #1041",
+									"amount": "KES 4,200",
+									"status": "Preparing"
+								},
+								{
+									"initials": "AS",
+									"customer": "Amina S.",
+									"detail": "Phone case · Order #1040",
+									"amount": "KES 2,800",
+									"status": "To deliver"
+								}
+							],
+							"home_tab_label": "Home",
+							"orders_tab_label": "Orders",
+							"products_tab_label": "Products",
+							"inbox_tab_label": "Inbox"
+						},
+						{
+							"_type": "marketing_pricing",
+							"_version": 1,
+							"_key": "home-pricing",
+							"anchor_id": "pricing",
+							"headline": "Buy AI tokens when you need them",
+							"plans": [
+								{
+									"name": "Starter",
+									"price": "KES 500",
+									"period": "per token pack",
+									"description": "For a store getting started with AI replies.",
+									"features": "100,000 AI tokens\nKES 5 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+									"cta_label": "Get Starter",
+									"cta_url": "https://wc.uzskicorp.agency/contact",
+									"highlighted": false
+								},
+								{
+									"name": "Growth",
+									"price": "KES 2,000",
+									"period": "per token pack",
+									"description": "For stores with daily WhatsApp orders.",
+									"features": "500,000 AI tokens\nKES 4 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+									"cta_label": "Get Growth",
+									"cta_url": "https://wc.uzskicorp.agency/contact",
+									"highlighted": true
+								},
+								{
+									"name": "Scale",
+									"price": "KES 7,000",
+									"period": "per token pack",
+									"description": "For higher-volume customer conversations.",
+									"features": "2,000,000 AI tokens\nKES 3.5 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+									"cta_label": "Get Scale",
+									"cta_url": "https://wc.uzskicorp.agency/contact",
+									"highlighted": false
+								}
+							]
+						},
+						{
+							"_type": "marketing_faq",
+							"_version": 1,
+							"_key": "faq",
+							"anchor_id": "faq",
+							"headline": "Before you get started",
+							"items": [
+								{
+									"question": "Can I keep my WhatsApp Business number?",
+									"answer": "WarpCart says you can connect your existing WhatsApp Business app number and keep phone replies and automation in the same chat. You can also connect a new Cloud API number."
+								},
+								{
+									"question": "How are customer payments handled?",
+									"answer": "WarpCart supports M-Pesa payments. Its pricing page states that customer M-Pesa payments go to your till, while WarpCart charges for AI usage."
+								},
+								{
+									"question": "What do I get when I sign up?",
+									"answer": "Every new store receives 50,000 free AI tokens. The public pricing page says no credit card is required to start."
+								},
+								{
+									"question": "Is there a mobile vendor app?",
+									"answer": "The WarpCart Vendor App is available on Google Play for managing products, orders, customers and WhatsApp sales on Android."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "pricing",
+				"slug": "pricing",
+				"status": "published",
+				"data": {
+					"title": "Pricing",
+					"content": [
+						{
+							"_type": "marketing_hero",
+							"_version": 1,
+							"_key": "pricing-hero",
+							"headline": "AI tokens for customer replies",
+							"subheadline": "Start with 50,000 free tokens. Customer M-Pesa payments go to your till; token packs cover AI replies on WhatsApp.",
+							"centered": true,
+							"primary_cta_label": "Start free",
+							"primary_cta_url": "https://wc.uzskicorp.agency/contact"
+						},
+						{
+							"_type": "marketing_pricing",
+							"_version": 1,
+							"_key": "pricing",
+							"anchor_id": "plans",
+							"headline": "Choose a token pack",
+							"plans": [
+								{
+									"name": "Starter",
+									"price": "KES 500",
+									"period": "per token pack",
+									"description": "For a store getting started with AI replies.",
+									"features": "100,000 AI tokens\nKES 5 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+									"cta_label": "Get Starter",
+									"cta_url": "https://wc.uzskicorp.agency/contact",
+									"highlighted": false
+								},
+								{
+									"name": "Growth",
+									"price": "KES 2,000",
+									"period": "per token pack",
+									"description": "For stores with daily WhatsApp orders.",
+									"features": "500,000 AI tokens\nKES 4 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+									"cta_label": "Get Growth",
+									"cta_url": "https://wc.uzskicorp.agency/contact",
+									"highlighted": true
+								},
+								{
+									"name": "Scale",
+									"price": "KES 7,000",
+									"period": "per token pack",
+									"description": "For higher-volume customer conversations.",
+									"features": "2,000,000 AI tokens\nKES 3.5 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+									"cta_label": "Get Scale",
+									"cta_url": "https://wc.uzskicorp.agency/contact",
+									"highlighted": false
+								}
+							]
+						},
+						{
+							"_type": "marketing_faq",
+							"_version": 1,
+							"_key": "pricing-faq",
+							"headline": "Token pricing, explained",
+							"items": [
+								{
+									"question": "What do I get when I sign up?",
+									"answer": "Every new store receives 50,000 free AI tokens. The public pricing page says no credit card is required to start."
+								},
+								{
+									"question": "How are customer payments handled?",
+									"answer": "WarpCart supports M-Pesa payments. Its pricing page states that customer M-Pesa payments go to your till, while WarpCart charges for AI usage."
+								},
+								{
+									"question": "When are tokens used?",
+									"answer": "The published token packs are used when AI answers customers on WhatsApp."
+								},
+								{
+									"question": "Can I buy a custom amount?",
+									"answer": "The live pricing page offers custom token amounts. Check WarpCart’s pricing page for the current amount and rate before purchasing."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "contact",
+				"slug": "contact",
+				"status": "published",
+				"data": {
+					"title": "Contact",
+					"content": [
+						{
+							"_type": "marketing_hero",
+							"_version": 1,
+							"_key": "contact-hero",
+							"headline": "Talk to WarpCart",
+							"subheadline": "Contact WarpCart on WhatsApp using the number listed on its public website.",
+							"centered": true,
+							"primary_cta_label": "Start free",
+							"primary_cta_url": "https://wc.uzskicorp.agency/contact",
+							"secondary_cta_label": "Message on WhatsApp",
+							"secondary_cta_url": "https://wa.me/254119413044"
+						}
+					]
+				}
+			}
+		]
+	}
+}

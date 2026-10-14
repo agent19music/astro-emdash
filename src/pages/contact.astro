@@ -1,0 +1,282 @@
+---
+import SiteButton from "../components/SiteButton";
+import Base from "../layouts/Base.astro";
+
+const portfolio = "https://sean.uzskicorp.agency";
+const email = "seanmotanya@gmail.com";
+
+// Phosphor icon paths (256 × 256), inlined.
+const icons = {
+	"github": "M208.31 75.68A59.78 59.78 0 0 0 202.93 28a8 8 0 0 0-6.93-4a59.75 59.75 0 0 0-48 24h-24a59.75 59.75 0 0 0-48-24a8 8 0 0 0-6.93 4a59.78 59.78 0 0 0-5.38 47.68A58.14 58.14 0 0 0 56 104v8a56.06 56.06 0 0 0 48.44 55.47A39.8 39.8 0 0 0 96 192v8H72a24 24 0 0 1-24-24a40 40 0 0 0-40-40a8 8 0 0 0 0 16a24 24 0 0 1 24 24a40 40 0 0 0 40 40h24v16a8 8 0 0 0 16 0v-40a24 24 0 0 1 48 0v40a8 8 0 0 0 16 0v-40a39.8 39.8 0 0 0-8.44-24.53A56.06 56.06 0 0 0 216 112v-8a58.14 58.14 0 0 0-7.69-28.32M200 112a40 40 0 0 1-40 40h-48a40 40 0 0 1-40-40v-8a41.74 41.74 0 0 1 6.9-22.48a8 8 0 0 0 1.1-7.69a43.8 43.8 0 0 1 .79-33.58a43.88 43.88 0 0 1 32.32 20.06a8 8 0 0 0 6.71 3.69h32.35a8 8 0 0 0 6.74-3.69a43.87 43.87 0 0 1 32.32-20.06a43.8 43.8 0 0 1 .77 33.58a8.09 8.09 0 0 0 1 7.65a41.7 41.7 0 0 1 7 22.52Z",
+	"linkedin": "M216 24H40a16 16 0 0 0-16 16v176a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V40a16 16 0 0 0-16-16m0 192H40V40h176zM96 112v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0m88 28v36a8 8 0 0 1-16 0v-36a20 20 0 0 0-40 0v36a8 8 0 0 1-16 0v-64a8 8 0 0 1 15.79-1.78A36 36 0 0 1 184 140m-84-56a12 12 0 1 1-12-12a12 12 0 0 1 12 12",
+	"x": "m214.75 211.71l-62.6-98.38l61.77-67.95a8 8 0 0 0-11.84-10.76l-58.84 64.72l-40.49-63.63A8 8 0 0 0 96 32H48a8 8 0 0 0-6.75 12.3l62.6 98.37l-61.77 68a8 8 0 1 0 11.84 10.76l58.84-64.72l40.49 63.63A8 8 0 0 0 160 224h48a8 8 0 0 0 6.75-12.29M164.39 208L62.57 48h29l101.86 160Z",
+	"email": "M224 48H32a8 8 0 0 0-8 8v136a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a8 8 0 0 0-8-8m-20.57 16L128 133.15L52.57 64ZM216 192H40V74.19l82.59 75.71a8 8 0 0 0 10.82 0L216 74.19z",
+	"arrow": "M200 64v104a8 8 0 0 1-16 0V83.31L69.66 197.66a8 8 0 0 1-11.32-11.32L172.69 72H88a8 8 0 0 1 0-16h104a8 8 0 0 1 8 8"
+};
+
+const tools = [
+	{ name: "Cursor", src: "/images/logos/cursor.svg" },
+	{ name: "Claude Code", src: "/images/logos/claude.svg" },
+	{ name: "Codex", src: "/images/logos/codex.svg" },
+	{ name: "Grok", src: "/images/logos/grok.svg" },
+];
+
+const links = [
+	{ icon: icons.github, label: "GitHub", href: "https://github.com/agent19music" },
+	{ icon: icons.linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/sean-motanya/" },
+	{ icon: icons.x, label: "X", href: "https://x.com/uzski404" },
+	{ icon: icons.email, label: "Email", href: `mailto:${email}` },
+];
+---
+
+<Base
+	title="Hello from Sean"
+	pageTitle="Hello from Sean"
+	description="A note from Sean Motanya, the full-stack engineer who remodelled this site for WarpCart."
+>
+	<section class="letter section" aria-labelledby="letter-heading">
+		<div class="letter-inner">
+			<header class="letter-head">
+				<div class="letter-photo">
+					<img src="/images/sean/portrait.webp" alt="Sean Motanya smiling with arms crossed at a tech conference" width="256" height="256" />
+				</div>
+				<div class="letter-who">
+					<h1 id="letter-heading">Sean Motanya</h1>
+					<p>Full-stack software engineer · Nairobi</p>
+				</div>
+				<ul class="letter-links">
+					{links.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								aria-label={link.label}
+								target={link.href.startsWith("http") ? "_blank" : undefined}
+								rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+							>
+								<svg viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d={link.icon} /></svg>
+							</a>
+						</li>
+					))}
+				</ul>
+			</header>
+
+			<div class="letter-body">
+				<p class="letter-greeting">Hello, BrickLabs team.</p>
+				<p>
+					I’m Sean, and I made this site for you. I had a few spare hours, so I gave them to
+					WarpCart: a remodel of what you have today, shaped by how I’d like the product to feel.
+					I pride myself with high taste in product design, and I am well versed with system design.
+				</p>
+				<p>
+					I’m a full-stack engineer working across the multiple ecosystems.
+					I write web clients and servers in Elixir, TypeScript and Python, and cross-platform
+					native mobile clients in TypeScript. I have worked on multiple AI systems like (<a class="letter-link" href="https://athena.uzskicorp.agency/" target="_blank" rel="noopener noreferrer">athena</a>) and my workflows are primarily agentic inside <span class="hero-apps-group"><span class="hero-apps letter-tools"><span class="hero-apps-label">Cursor, Claude Code, Codex and Grok</span>{tools.map((tool) => (
+						<span class="hero-app" aria-hidden="true"><img src={tool.src} alt="" width="48" height="48" /></span>
+					))}</span>.</span>
+				</p>
+				<p>
+				 This is like the least of what I can do and if it resonates, I’d love to talk ⸜(｡˃ ᵕ ˂ )⸝
+				</p>
+			</div>
+
+			<footer class="letter-foot">
+				<div class="letter-actions">
+					<SiteButton href={`mailto:${email}`} label="Email me" primary />
+					<a class="letter-portfolio" href={portfolio} target="_blank" rel="noopener noreferrer">
+						See my work
+						<svg viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d={icons.arrow} /></svg>
+					</a>
+				</div>
+				<div class="letter-signature">
+					<img src="/images/sean/signature.png" alt="Sean’s signature" width="247" height="180" />
+				</div>
+			</footer>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.letter {
+		padding-block: 96px;
+	}
+
+	.letter-inner {
+		max-width: 600px;
+		margin-inline: auto;
+		padding-inline: 24px;
+	}
+
+	.letter-head {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		justify-items: start;
+		gap: 16px;
+		margin-bottom: 40px;
+	}
+
+	.letter-photo {
+		display: grid;
+		place-items: center;
+		width: 128px;
+		height: 128px;
+		overflow: hidden;
+		border-radius: 12px;
+		background: var(--color-surface);
+		box-shadow: inset 0 0 0 1px var(--color-border);
+		color: var(--color-muted);
+		font-size: var(--font-size-lg);
+		font-weight: 600;
+	}
+
+	.letter-photo img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.letter-who h1 {
+		font-size: var(--font-size-xl);
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		line-height: 1.3;
+	}
+
+	.letter-who p {
+		margin-top: 2px;
+		color: var(--color-muted);
+		font-size: var(--font-size-sm);
+	}
+
+	.letter-links {
+		grid-column: 1 / -1;
+		display: flex;
+		gap: 8px;
+		margin: 0 0 0 -10px;
+		padding: 0;
+		list-style: none;
+	}
+
+	.letter-links a {
+		display: grid;
+		place-items: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		color: var(--color-text);
+		transition: background-color 200ms ease-out;
+	}
+
+	.letter-links svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.letter-portfolio svg {
+		width: 16px;
+		height: 16px;
+	}
+
+	.letter-links a:active {
+		background: var(--color-surface);
+	}
+
+	.letter-body {
+		display: grid;
+		gap: 16px;
+		font-size: 1.0625rem;
+		line-height: 1.7;
+		color: var(--color-text);
+		text-wrap: pretty;
+	}
+
+	.letter-link {
+		color: var(--color-kumo-brand, #1678e8);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.letter-tools {
+		font-size: 1.375em;
+		vertical-align: -0.3em;
+	}
+
+	.letter-greeting {
+		font-weight: 600;
+	}
+
+	.letter-foot {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 24px;
+		margin-top: 40px;
+	}
+
+	.letter-actions {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+	}
+
+	.letter-portfolio {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		min-height: 44px;
+		color: var(--color-text);
+		font-size: var(--font-size-sm);
+		font-weight: 500;
+		text-decoration: underline;
+		text-decoration-color: var(--color-border);
+		text-underline-offset: 4px;
+		transition: text-decoration-color 200ms ease-out;
+	}
+
+	.letter-signature {
+		flex: none;
+		width: 120px;
+	}
+
+	.letter-signature img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.letter-signature img {
+			filter: invert(1);
+		}
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.letter-links a:hover {
+			background: var(--color-surface);
+		}
+
+		.letter-portfolio:hover {
+			text-decoration-color: currentColor;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.letter {
+			padding-block: 48px;
+		}
+
+		.letter-inner {
+			padding-inline: 16px;
+		}
+
+		.letter-foot {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.letter-signature {
+			align-self: flex-end;
+			width: 104px;
+		}
+	}
+</style>

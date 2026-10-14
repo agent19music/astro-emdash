@@ -1,0 +1,48 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "warpcart",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"routes": [
+		{
+			"pattern": "wc.uzskicorp.agency",
+			"custom_domain": true
+		}
+	],
+	// Let Cloudflare choose placement based on measured upstream latency.
+	"placement": {
+		"mode": "smart"
+	},
+	// Wrangler provisions/reuses warpcart-CACHE at deploy time.
+	"kv_namespaces": [
+		{
+			"binding": "CACHE",
+			"id": "8b37beb40b7649629d72dbc8c4e40783"
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "warpcart",
+			"database_id": "49ca69f4-7e32-4708-8c84-51257564d589",
+			"migrations_dir": "../../migrations",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "warpcart-media",
+		},
+	],
+	// Sandboxed plugins require Worker Loader, available on Workers paid plans. Uncomment to enable:
+	// "worker_loaders": [{ "binding": "LOADER" }],
+	// General maintenance cron trigger
+	"triggers": {
+		"crons": [
+			"* * * * *"
+		],
+	},
+}

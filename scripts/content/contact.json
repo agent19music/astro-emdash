@@ -1,0 +1,17 @@
+{
+	"title": "Contact",
+	"content": [
+		{
+			"_type": "marketing_hero",
+			"_version": 1,
+			"_key": "contact-hero",
+			"headline": "Talk to WarpCart",
+			"subheadline": "Contact WarpCart on WhatsApp using the number listed on its public website.",
+			"centered": true,
+			"primary_cta_label": "Start free",
+			"primary_cta_url": "https://wc.uzskicorp.agency/contact",
+			"secondary_cta_label": "Message on WhatsApp",
+			"secondary_cta_url": "https://wa.me/254119413044"
+		}
+	]
+}

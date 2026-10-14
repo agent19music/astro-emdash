@@ -1,0 +1,4 @@
+/* Isolate Kumo's compiled utilities/reset below the site's existing base.
+   No Tailwind pipeline or client hydration is required for native links. */
+@layer kumo, base;
+@import '@cloudflare/kumo/styles/standalone' layer(kumo);

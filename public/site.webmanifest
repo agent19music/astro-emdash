@@ -1,0 +1,16 @@
+{
+  "id": "/",
+  "name": "WarpCart",
+  "short_name": "WarpCart",
+  "description": "Sell on WhatsApp. Manage your catalog, orders and customer conversations in one workspace.",
+  "lang": "en-KE",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

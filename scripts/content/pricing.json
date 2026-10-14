@@ -1,0 +1,78 @@
+{
+	"title": "Pricing",
+	"content": [
+		{
+			"_type": "marketing_hero",
+			"_version": 1,
+			"_key": "pricing-hero",
+			"headline": "AI tokens for customer replies",
+			"subheadline": "Start with 50,000 free tokens. Customer M-Pesa payments go to your till; token packs cover AI replies on WhatsApp.",
+			"centered": true,
+			"primary_cta_label": "Start free",
+			"primary_cta_url": "https://wc.uzskicorp.agency/contact"
+		},
+		{
+			"_type": "marketing_pricing",
+			"_version": 1,
+			"_key": "pricing",
+			"anchor_id": "plans",
+			"headline": "Choose a token pack",
+			"plans": [
+				{
+					"name": "Starter",
+					"price": "KES 500",
+					"period": "per token pack",
+					"description": "For a store getting started with AI replies.",
+					"features": "100,000 AI tokens\nKES 5 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+					"cta_label": "Get Starter",
+					"cta_url": "https://wc.uzskicorp.agency/contact",
+					"highlighted": false
+				},
+				{
+					"name": "Growth",
+					"price": "KES 2,000",
+					"period": "per token pack",
+					"description": "For stores with daily WhatsApp orders.",
+					"features": "500,000 AI tokens\nKES 4 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+					"cta_label": "Get Growth",
+					"cta_url": "https://wc.uzskicorp.agency/contact",
+					"highlighted": true
+				},
+				{
+					"name": "Scale",
+					"price": "KES 7,000",
+					"period": "per token pack",
+					"description": "For higher-volume customer conversations.",
+					"features": "2,000,000 AI tokens\nKES 3.5 per 1,000 tokens\nUsed when AI answers on WhatsApp",
+					"cta_label": "Get Scale",
+					"cta_url": "https://wc.uzskicorp.agency/contact",
+					"highlighted": false
+				}
+			]
+		},
+		{
+			"_type": "marketing_faq",
+			"_version": 1,
+			"_key": "pricing-faq",
+			"headline": "Token pricing, explained",
+			"items": [
+				{
+					"question": "What do I get when I sign up?",
+					"answer": "Every new store receives 50,000 free AI tokens. The public pricing page says no credit card is required to start."
+				},
+				{
+					"question": "How are customer payments handled?",
+					"answer": "WarpCart supports M-Pesa payments. Its pricing page states that customer M-Pesa payments go to your till, while WarpCart charges for AI usage."
+				},
+				{
+					"question": "When are tokens used?",
+					"answer": "The published token packs are used when AI answers customers on WhatsApp."
+				},
+				{
+					"question": "Can I buy a custom amount?",
+					"answer": "The live pricing page offers custom token amounts. Check WarpCart\u2019s pricing page for the current amount and rate before purchasing."
+				}
+			]
+		}
+	]
+}

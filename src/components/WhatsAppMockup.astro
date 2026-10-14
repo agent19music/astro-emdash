@@ -1,0 +1,75 @@
+---
+import IOSGlyph from "./IOSGlyph.astro";
+interface Props { scenario?: string; compact?: boolean; platform?: 'whatsapp' | 'instagram' }
+const { scenario = 'catalog', compact = false, platform = 'whatsapp' } = Astro.props;
+const instagram = platform === 'instagram';
+interface Product { name: string; price: string; detail: string; image?: string; backdrop?: string; cover?: boolean }
+const tote: Product = { name: 'Everyday tote', price: 'KES 1,800', detail: 'Olive · Canvas' };
+const scenes: Record<string, { question: string; reply: string; followup: string; product?: Product }> = {
+ catalog: { question: 'Hi! Can I see your bags?', reply: 'Of course. Here’s our everyday collection.', followup: 'I’ll take the green tote, please.', product: { name: 'Everyday collection', price: 'From KES 1,200', detail: 'Totes · Pouches · Canvas', image: '/images/products/everyday-collection.webp', cover: true } },
+ cloud: { question: 'Is the olive tote still available?', reply: 'Yes, it’s in stock. Here’s the current collection.', followup: 'Perfect. I’d like to order one.' },
+ users: { question: 'I saw your new collection!', reply: 'Welcome back. Here are the pieces you asked about.', followup: 'Can I get the everyday tote?' },
+ clock: { question: 'I didn’t finish my order yesterday.', reply: 'Your olive tote is still in your cart. Ready to continue?', followup: 'Yes, let’s finish the order.', product: { ...tote, image: '/images/products/canvas-tote.webp', backdrop: '#f6f6f6' } },
+ star: { question: 'What would you suggest for a morning boost?', reply: 'Try the Broc Shot trio. One of each flavour to find your favourite.', followup: 'That’s exactly what I need.', product: { name: 'Broc Shot trio', price: 'KES 1,200', detail: '3 × 30 ml · Mixed flavours', image: '/images/products/broc-shot-trio.webp', backdrop: '#d9d9d9' } },
+ chart: { question: 'Has my payment gone through?', reply: 'Your M-Pesa payment is received. Your order is ready for fulfillment.', followup: 'Thank you! Looking forward to it.' },
+};
+const scene = scenes[scenario] || scenes.catalog;
+const product = scene.product ?? tote;
+---
+<div class:list={['demo-phone', { 'demo-phone-compact': compact }]} role="img" aria-label={`Illustrative iPhone ${instagram ? 'Instagram direct message' : 'WhatsApp business chat'}: ${scene.question} ${scene.reply} Sample store and products, not a live screenshot.`}>
+ <div class="phone-screen" aria-hidden="true">
+  <div class="ios-status">
+   <span class="ios-time">9:41</span><span class="dynamic-island"><span></span></span>
+   <span class="ios-indicators"><svg class="ios-cellular" viewBox="0 0 20 14" fill="currentColor"><rect x="0" y="9" width="3" height="5" rx=".6"/><rect x="5" y="6" width="3" height="8" rx=".6"/><rect x="10" y="3" width="3" height="11" rx=".6"/><rect x="15" width="3" height="14" rx=".6"/></svg><svg class="ios-wifi" viewBox="0 0 20 15" fill="currentColor"><path d="M0 4a16 16 0 0 1 20 0l-2.4 2.5a12.5 12.5 0 0 0-15.2 0Zm4.1 4.2a9 9 0 0 1 11.8 0l-2.4 2.5a5.5 5.5 0 0 0-7 0Zm3.5 3.6a3.5 3.5 0 0 1 4.8 0L10 15Z"/></svg><svg class="ios-battery" viewBox="0 0 30 14"><rect x=".5" y="1" width="25" height="12" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2.5" y="3" width="21" height="8" rx="1.5" fill="currentColor"/><path d="M27 4v6c2 0 2-6 0-6" fill="currentColor" opacity=".4"/></svg></span>
+  </div>
+  {instagram ? (
+   <>
+    <div class="ig-chat">
+     <span class="ig-time">Today 9:41</span>
+     <div class="ig-bubble ig-outgoing">{scene.question}</div>
+     <div class="ig-row"><span class="ig-avatar-space"></span><div class="ig-bubble ig-incoming">{scene.reply}</div></div>
+     <div class="ig-row">
+      <span class="ig-avatar">W</span>
+      <div class="ig-share">
+       <div class="ig-share-head"><span class="ig-avatar ig-avatar-sm">W</span><strong>warpcart.store</strong></div>
+       <div class="ig-share-photo" style={product.backdrop ? `background: ${product.backdrop}` : undefined}>
+        {product.image && <img src={product.image} alt="" loading="lazy" decoding="async" />}
+       </div>
+       <p class="ig-share-caption"><strong>{product.name}</strong> {product.price}</p>
+      </div>
+     </div>
+     <div class="ig-bubble ig-outgoing">{scene.followup}</div>
+     <span class="ig-seen">Seen</span>
+    </div>
+    <div class="ig-bottom-chrome">
+     <div class="ig-compose"><span class="ig-camera"><IOSGlyph name="camera" /></span><span class="ig-placeholder">Message…</span><IOSGlyph name="microphone" /><IOSGlyph name="sticker" /></div>
+     <div class="ios-bottom-safe"><div class="home-indicator"></div></div>
+    </div>
+   </>
+  ) : (
+  <>
+  <div class="wa-chat">
+   <span class="wa-date">Today</span>
+   <div class="wa-bubble wa-outgoing"><span>{scene.question}</span><span class="wa-meta">9:41 <IOSGlyph name="read" /></span></div>
+   <div class="wa-bubble wa-incoming"><span>{scene.reply}</span><span class="wa-meta">9:41</span></div>
+   {scenario !== 'chart' ? (
+    <div class="wa-catalog-message">
+     <div class:list={['wa-product-photo', { 'wa-product-photo-image': product.image, 'wa-product-photo-cover': product.cover }]} style={product.backdrop ? `background: ${product.backdrop}` : undefined}>
+      {product.image
+       ? <img src={product.image} alt="" loading="lazy" decoding="async" />
+       : <><div class="tote-bag"><span></span></div><span class="product-photo-mark">EVERYDAY COLLECTION</span></>}
+     </div>
+     <div class="wa-product-info"><strong>{product.name}</strong><span class="wa-product-price">{product.price}</span><p>{product.detail}</p><span class="wa-meta">9:41</span></div>
+     <div class="catalog-action"><IOSGlyph name="bag" />View catalog</div>
+    </div>
+   ) : (
+    <div class="wa-order"><span class="payment-tick"><IOSGlyph name="check" /></span><strong>Payment received</strong><span>Order #1042 · KES 1,800</span><div>Ready for fulfillment</div><span class="wa-meta">9:42</span></div>
+   )}
+   <div class="wa-bubble wa-outgoing"><span>{scene.followup}</span><span class="wa-meta">9:42 <IOSGlyph name="read" /></span></div>
+   <div class="wa-bubble wa-incoming"><span>{scenario === 'chart' ? 'We’ll keep you updated here.' : 'Added to your order. Choose delivery, then pay with M-Pesa.'}</span><span class="wa-meta">9:42</span></div>
+  </div>
+  <div class="wa-bottom-chrome"><div class="wa-compose"><IOSGlyph name="plus" /><span class="compose-field"><IOSGlyph name="sticker" /></span><IOSGlyph name="camera" /><IOSGlyph name="microphone" /></div><div class="ios-bottom-safe"><div class="home-indicator"></div></div></div>
+  </>
+  )}
+ </div>
+</div>

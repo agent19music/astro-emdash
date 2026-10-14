@@ -1,0 +1,12 @@
+---
+import type { BlockComponentProps } from "emdash/ui";
+import type { PageContentBlock } from "../../../emdash-env";
+import VendorAppCard from "../VendorAppCard.astro";
+
+type VendorAppBlock = Extract<PageContentBlock, { _type: "marketing_vendor_app" }>;
+type Props = BlockComponentProps<VendorAppBlock>;
+
+const { value } = Astro.props;
+---
+
+<VendorAppCard value={value} />

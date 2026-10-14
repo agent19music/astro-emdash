@@ -1,0 +1,22 @@
+---
+import WhatsAppMockup from '../WhatsAppMockup.astro';
+import { photoScenes } from './feature-artwork';
+interface Props { artwork: string }
+const { artwork } = Astro.props;
+const scene = artwork.replace(/-light$/, '');
+const photo = photoScenes[scene];
+---
+{photo ? (
+	<div class="feature-product-visual feature-photo">
+		<img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} style={`object-position: ${photo.position}`} />
+	</div>
+) : (
+	<div class:list={['feature-product-visual', 'product-stage', { 'product-stage-light': artwork.endsWith('-light') }]}>
+		<WhatsAppMockup scenario={scene} compact platform={scene === 'clock' ? 'instagram' : 'whatsapp'} />
+	</div>
+)}
+<div class="feature-blur" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<style>
+	.feature-photo { background: var(--color-surface); }
+	.feature-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+</style>

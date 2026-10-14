@@ -1,0 +1,16 @@
+/* Export-only effects. Imported by the development artwork canvas, never by public pages. */
+/* Progressive blur: stacked backdrop layers, each masked to start a little lower
+   and blur a little harder, so the image melts into the caption. */
+:root body .feature-blur { position: absolute; inset: auto 0 0; height: 60%; pointer-events: none; }
+:root body .feature-blur > span { position: absolute; inset: 0; }
+:root body .feature-blur > span:nth-child(1) { -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 50%, transparent 75%); }
+:root body .feature-blur > span:nth-child(2) { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); mask-image: linear-gradient(to bottom, transparent 25%, #000 50%, #000 75%, transparent 100%); }
+:root body .feature-blur > span:nth-child(3) { -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); mask-image: linear-gradient(to bottom, transparent 50%, #000 75%); }
+:root body .feature-blur > span:nth-child(4) { -webkit-backdrop-filter: blur(28px); backdrop-filter: blur(28px); mask-image: linear-gradient(to bottom, transparent 70%, #000 100%); }
+:root body .feature-blur::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / .28) 45%, rgb(0 0 0 / .62) 100%); }
+
+@media (prefers-reduced-transparency: reduce) {
+ :root body .feature-blur > span { -webkit-backdrop-filter: none; backdrop-filter: none; }
+ :root body .feature-blur::after { background: linear-gradient(to bottom, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / .5) 40%, rgb(0 0 0 / .8) 100%); }
+}
+
